@@ -8,7 +8,7 @@
     "dev": "nodemon --config restart.json",
     "test": "jest"
   },
-  "author": "Orlando J Betancourth orlando.betancourth@gmail.com",
+  "author": "Fernando Mendoza fy_mendozam@unicah.edu",
   "license": "ISC",
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
