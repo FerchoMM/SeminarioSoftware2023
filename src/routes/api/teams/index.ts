@@ -69,3 +69,5 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 export default router;
+
+//Fernando Mendoza 0321200200561
