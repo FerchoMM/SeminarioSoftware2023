@@ -43,13 +43,8 @@ router.put('/update/:id', async (req, res) => {
     try {
         const { id = '' } = req.params;
         const { name = '', description = '', participants = '', isActive = true } = req.body;
-
-        const updatedTeam = await updateTeam(id , {
-            name,
-            description,
-            participants,
-            isActive
-        });
+        const teamUpdate = {name, description, participants, isActive}
+        const updatedTeam = await updateTeam(id , teamUpdate);
         res.json(updatedTeam);
     } catch (ex: any) {
         return res.status(500).json({ error: ex?.message });
