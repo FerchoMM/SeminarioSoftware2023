@@ -1,3 +1,5 @@
+import { ProjectDao } from '@server/dao/models/ProjectsDao'
+
 export interface IProject {
     _id?: string;
     name: string;
@@ -11,35 +13,29 @@ export interface IProject {
 
 const memoryProjects: IProject[] = [];
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-let createdProjects: number = 0;
+//let createdProjects: number = 0;
+
+const ProjectDaoInstance = new ProjectDao();
 
 export const createProject = async (project: IProject) => {
-    const newProject = { ...project };
-    newProject._id = (++createdProjects).toString();
-    newProject.createdAt = new Date();
-    newProject.updatedAt = newProject.createdAt;
-    memoryProjects.push(newProject);
-    return newProject;
+    return ProjectDaoInstance.create(project)
 }
 
 export const getProjects = async () => {
-    return memoryProjects;
+    return ProjectDaoInstance.find({});
+}
+
+export const getProject = async (id: string) => {
+    return ProjectDaoInstance.findOne(id);
 }
 
 export const updateProject = (id: string, project: IProject) => {
 
-    const index = memoryProjects.findIndex(p => p._id === id);
-    if (index === -1) throw new Error('Project not found');
-
-    memoryProjects[index] = { ...memoryProjects[index], ...project, updatedAt: new Date() };
-    return memoryProjects[index];
+    return ProjectDaoInstance.update(id, project)
 }
 
 export const deleteProject = (id: string) => {
-    const index = memoryProjects.findIndex(p => p._id === id);
-    if (index === -1) throw new Error('Project not found');
-    memoryProjects.splice(index, 1);
-    return true;
+    return ProjectDaoInstance.delete(id);
 }
 
 //Fernando Mendoza 0321200200561
