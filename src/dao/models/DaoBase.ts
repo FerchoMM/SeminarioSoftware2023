@@ -6,3 +6,4 @@ export abstract class DaoBase<T> {
     public abstract find(item: T): Promise<T[]>;
     public abstract findOne(id: string): Promise<T>;
 }
+
